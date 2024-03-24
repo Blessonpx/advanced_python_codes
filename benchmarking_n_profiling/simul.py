@@ -4,6 +4,7 @@
 from matplotlib import pyplot as plt
 from matplotlib import animation
 from random import uniform
+import cProfile
 import pytest
 class Particle:
     def __init__(self,x,y,ang_vel):
@@ -105,4 +106,8 @@ if __name__ == '__main__':
     #######################################################################################################
     # finding bottlenecks with cProfile
     #python -m cProfile -o prof.out .\benchmarking_n_profiling\simul.py
-    
+    pr=cProfile.Profile()
+    pr.enable()
+    benchmark()
+    pr.disable()
+    pr.print_stats()
