@@ -3,7 +3,8 @@
 
 from matplotlib import pyplot as plt
 from matplotlib import animation
-
+from random import uniform
+import pytest
 class Particle:
     def __init__(self,x,y,ang_vel):
         self.x=x
@@ -63,28 +64,38 @@ def test_visualize():
     simulator = ParticleSimulator(particles)
     visualize(simulator)
 
-def test_evolve():
+def test_evolve(benchmark):
     particles = [
         Particle(0.3,0.5,+1),
         Particle(0,-0.5,-1),
         Particle(-0.1,-0.4,+3)
     ]
     simulator = ParticleSimulator(particles)
-    simulator.evolve(0.1)
+    benchmark(simulator.evolve,0.1)
     p0,p1,p2=particles
     # Original Code has eps value of 1e-5,the tolerance has decreased
     # needs to be found out whats the case 
     def fequal(a,b,eps=1e-3):
         return abs(a - b )< eps
+    #print("p0.x=",p0.x,"||","p0.y=",p0.y)
     assert fequal(p0.x,0.210269)
     assert fequal(p0.y,0.543863)
     assert fequal(p1.x,-0.099334)
     assert fequal(p1.y,-0.490034)
-    print("p2.x=",p2.x,"||","p2.y=",p2.y)
+    #print("p2.x=",p2.x,"||","p2.y=",p2.y)
     assert fequal(p2.x,0.191358)
     assert fequal(p2.y,-0.365227)
 
+def benchmark():
+    particles=[
+        Particle(uniform(-1.0,1.0),uniform(-1.0,1.0),uniform(-1.0,1.0))
+    for i in range(1000)]
+    simulator= ParticleSimulator(particles)
+    simulator.evolve(0.1)
+
 if __name__ == '__main__':
     #test_visualize()
-    print("Testing Evolve Funtion")
-    test_evolve()
+    #print("Testing Evolve Funtion")
+    #test_evolve()
+    #print("Run Benchmark for 1000 particles")
+    benchmark()
