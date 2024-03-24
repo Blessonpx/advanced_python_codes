@@ -1,0 +1,75 @@
+event: ns : Nanoseconds
+events: ns
+summary: 87171000
+fl=.\benchmarking_n_profiling\taylor.py
+fn=<module>
+1 13300
+cfl=.\benchmarking_n_profiling\taylor.py
+cfn=benchmark
+calls=1 19
+1 87153100
+
+fl=.\benchmarking_n_profiling\taylor.py
+fn=factorial
+1 86338300
+cfl=.\benchmarking_n_profiling\taylor.py
+cfn=factorial
+calls=187250 1
+1 85958800
+
+fl=.\benchmarking_n_profiling\taylor.py
+fn=taylor_exp
+7 4700
+cfl=.\benchmarking_n_profiling\taylor.py
+cfn=<listcomp>
+calls=1 8
+7 58052700
+
+fl=.\benchmarking_n_profiling\taylor.py
+fn=<listcomp>
+8 275500
+cfl=.\benchmarking_n_profiling\taylor.py
+cfn=factorial
+calls=500 1
+8 57777200
+
+fl=.\benchmarking_n_profiling\taylor.py
+fn=taylor_sin
+10 462400
+cfl=.\benchmarking_n_profiling\taylor.py
+cfn=factorial
+calls=250 1
+10 28561100
+cfl=~
+cfn=<method 'append' of 'list' objects>
+calls=500 0
+10 61600
+
+fl=.\benchmarking_n_profiling\taylor.py
+fn=benchmark
+19 10600
+cfl=.\benchmarking_n_profiling\taylor.py
+cfn=taylor_exp
+calls=1 7
+19 58057400
+cfl=.\benchmarking_n_profiling\taylor.py
+cfn=taylor_sin
+calls=1 10
+19 29085100
+
+fl=~
+fn=<built-in method builtins.exec>
+0 4600
+cfl=.\benchmarking_n_profiling\taylor.py
+cfn=<module>
+calls=1 1
+0 87166400
+
+fl=~
+fn=<method 'append' of 'list' objects>
+0 61600
+
+fl=~
+fn=<method 'disable' of '_lsprof.Profiler' objects>
+0 900
+
