@@ -99,3 +99,10 @@ if __name__ == '__main__':
     #test_evolve()
     #print("Run Benchmark for 1000 particles")
     benchmark()
+    ## Adding benchmark to a funtion to give range of time of executions for a given call 
+    ## Quite Good at predictions 
+    ## Prefer to call in the code instead of terminal
+    #######################################################################################################
+    # finding bottlenecks with cProfile
+    #python -m cProfile -o prof.out .\benchmarking_n_profiling\simul.py
+    
