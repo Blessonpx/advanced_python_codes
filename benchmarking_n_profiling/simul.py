@@ -111,3 +111,9 @@ if __name__ == '__main__':
     benchmark()
     pr.disable()
     pr.print_stats()
+
+    # Algo to do BenchMarking by Python 
+    # 1- Figure Out Funtion By FUntion Profiler Time for execution 
+    # 2- Once Narrowed on Function , figure out Line by Line profiler time 
+
+    ## Unable to test line_profiler as working not happening 
