@@ -15,7 +15,8 @@ class Particle:
 class ParticleSimulator:
     def __init__(self,particles):
         self.particles=particles
-
+    
+    @profile
     def evolve(self,dt):
         timestep = 0.0001
         nsteps = int(dt/timestep)
@@ -106,18 +107,18 @@ if __name__ == '__main__':
     #######################################################################################################
     # finding bottlenecks with cProfile
     #python -m cProfile -o prof.out .\benchmarking_n_profiling\simul.py
-    pr=cProfile.Profile()
-    pr.enable()
+    #pr=cProfile.Profile()
+    #pr.enable()
+    #benchmark()
+    #pr.disable()
+    #pr.print_stats()
     benchmark()
-    pr.disable()
-    pr.print_stats()
-
     # Algo to do BenchMarking by Python 
     # 1- Figure Out Funtion By FUntion Profiler Time for execution 
     # 2- Once Narrowed on Function , figure out Line by Line profiler time 
 
     ## Unable to test line_profiler as working not happening 
     ## To use line profiler do the following 
-    ## ## onda install line_profiler
+    ## onda install line_profiler
     ## Add @Profile to function to find line by line bottle_necks
     
