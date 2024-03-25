@@ -16,7 +16,7 @@ class ParticleSimulator:
     def __init__(self,particles):
         self.particles=particles
     
-    @profile
+    #@profile
     def evolve(self,dt):
         timestep = 0.0001
         nsteps = int(dt/timestep)
