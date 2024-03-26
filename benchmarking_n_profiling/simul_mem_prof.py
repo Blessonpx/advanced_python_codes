@@ -16,7 +16,6 @@ class ParticleSimulator:
     def __init__(self,particles):
         self.particles=particles
     
-    @profile
     def evolve(self,dt):
         timestep = 0.0001
         nsteps = int(dt/timestep)
@@ -88,6 +87,7 @@ def test_evolve(benchmark):
     assert fequal(p2.x,0.191358)
     assert fequal(p2.y,-0.365227)
 
+@profile
 def benchmark():
     particles=[
         Particle(uniform(-1.0,1.0),uniform(-1.0,1.0),uniform(-1.0,1.0))
@@ -112,7 +112,7 @@ if __name__ == '__main__':
     #benchmark()
     #pr.disable()
     #pr.print_stats()
-    benchmark()
+    #benchmark()
     # Algo to do BenchMarking by Python 
     # 1- Figure Out Funtion By FUntion Profiler Time for execution 
     # 2- Once Narrowed on Function , figure out Line by Line profiler time 
