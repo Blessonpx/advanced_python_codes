@@ -7,6 +7,7 @@ from random import uniform
 import cProfile
 import pytest
 class Particle:
+    __slots__ = ('x','y','ang_vel')
     def __init__(self,x,y,ang_vel):
         self.x=x
         self.y=y
@@ -121,4 +122,26 @@ if __name__ == '__main__':
     ## To use line profiler do the following 
     ## onda install line_profiler
     ## Add @Profile to function to find line by line bottle_necks
-    
+    ## #########################################################################################################
+#     ## memory profiler gave the following output 
+#     Line #    Mem usage    Increment  Occurrences   Line Contents
+# =============================================================
+#     90   88.730 MiB   88.730 MiB           1   @profile
+#     91                                         def benchmark():
+#     92   88.875 MiB    0.062 MiB        2004       particles=[
+#     93   88.875 MiB    0.066 MiB        1000           Particle(uniform(-1.0,1.0),uniform(-1.0,1.0),uniform(-1.0,1.0))
+#     94   88.875 MiB    0.016 MiB        1001       for i in range(1000)]
+#     95   88.875 MiB    0.000 MiB           1       simulator= ParticleSimulator(particles)
+#     96   88.875 MiB    0.000 MiB           1       simulator.evolve(0.1)
+# highest increment happens over particles =[Particle ....] line
+# Use of _slot_ to reduce memory_footprint to avoid making an internal dictionary for this
+# Result Post that 
+# Line #    Mem usage    Increment  Occurrences   Line Contents
+# =============================================================
+#     91   88.414 MiB   88.414 MiB           1   @profile
+#     92                                         def benchmark():
+#     93   88.531 MiB    0.074 MiB        2004       particles=[
+#     94   88.531 MiB    0.027 MiB        1000           Particle(uniform(-1.0,1.0),uniform(-1.0,1.0),uniform(-1.0,1.0))
+#     95   88.531 MiB    0.016 MiB        1001       for i in range(1000)]
+#     96   88.531 MiB    0.000 MiB           1       simulator= ParticleSimulator(particles)
+#     97   88.531 MiB    0.000 MiB           1       simulator.evolve(0.1)
