@@ -4,6 +4,7 @@
 from matplotlib import pyplot as plt
 from matplotlib import animation
 from random import uniform
+import random
 import cProfile
 import pytest
 class Particle:
@@ -92,14 +93,14 @@ def benchmark():
         Particle(uniform(-1.0,1.0),uniform(-1.0,1.0),uniform(-1.0,1.0))
     for i in range(1000)]
     simulator= ParticleSimulator(particles)
+    a = random.choice(particles)
+    b = random.choice(particles)
+    print(close(a,b))
     simulator.evolve(0.1)
 
-def close(Particle a, Particle b):
+def close(a:Particle , b:Particle )->bool:
     dis = ((a.x-b.x)**2 + (a.y - b.y)**2) ** 0.5
-    if dis<1e-5:
-        return True
-    else:
-        return False
+    return dis<1e-5
 
 
 if __name__ == '__main__':
@@ -107,7 +108,7 @@ if __name__ == '__main__':
     #print("Testing Evolve Funtion")
     #test_evolve()
     #print("Run Benchmark for 1000 particles")
-    benchmark()
+    #benchmark()
     ## Adding benchmark to a funtion to give range of time of executions for a given call 
     ## Quite Good at predictions 
     ## Prefer to call in the code instead of terminal
@@ -127,5 +128,27 @@ if __name__ == '__main__':
     ## Unable to test line_profiler as working not happening 
     ## To use line profiler do the following 
     ## ## onda install line_profiler
-    ## Add @Profile to function to find line by line bottle_necks
-    
+    ## Add @Profile to function to find line by line bottle_necks   
+
+    ###-------------------------------########################################################################
+    # While Using CLOSE Function when we benchmark with CProfile we get the following results
+#              7019 function calls in 1.410 seconds
+
+#    Ordered by: standard name
+
+#    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+#         2    0.000    0.000    0.000    0.000 random.py:235(_randbelow_with_getrandbits)
+#         2    0.000    0.000    0.000    0.000 random.py:367(choice)
+#      3000    0.001    0.000    0.002    0.000 random.py:520(uniform)
+#         1    0.000    0.000    0.000    0.000 simul_exercise_1.py:101(close)
+#      1000    0.000    0.000    0.000    0.000 simul_exercise_1.py:11(__init__)
+#         1    0.000    0.000    0.000    0.000 simul_exercise_1.py:17(__init__)
+#         1    1.406    1.406    1.406    1.406 simul_exercise_1.py:20(evolve)
+#         1    0.000    0.000    1.410    1.410 simul_exercise_1.py:91(benchmark)
+#         1    0.001    0.001    0.003    0.003 simul_exercise_1.py:92(<listcomp>)
+#         4    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+#         1    0.000    0.000    0.000    0.000 {built-in method builtins.print}
+#         2    0.000    0.000    0.000    0.000 {method 'bit_length' of 'int' objects}
+#         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+#         2    0.000    0.000    0.000    0.000 {method 'getrandbits' of '_random.Random' objects}
+#      3000    0.000    0.000    0.000    0.000 {method 'random' of '_random.Random' objects} 
