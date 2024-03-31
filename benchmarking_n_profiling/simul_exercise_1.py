@@ -117,7 +117,7 @@ if __name__ == '__main__':
     #python -m cProfile -o prof.out .\benchmarking_n_profiling\simul.py
     pr=cProfile.Profile()
     pr.enable()
-    benchmark()
+    benchmark() 
     pr.disable()
     pr.print_stats()
 
